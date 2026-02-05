@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Senior Full Stack Engineer",
+    "type": "Remote (Intl)",
+    "tags": [
+      "React",
+      "Node.js",
+      "AWS"
+    ],
+    "description": "We are looking for an experienced Full Stack Engineer to join our core team..."
+  },
+  {
+    "id": 2,
+    "title": "Lead Product Designer",
+    "type": "Remote (Global)",
+    "tags": [
+      "Figma",
+      "Design Systems"
+    ],
+    "description": "Design the future of our digital products..."
+  },
+  {
+    "title": "Vedio Editot",
+    "type": "Kolkata",
+    "tags": [
+      "Adobe Premiere"
+    ],
+    "description": "2-3Yrs Experience",
+    "id": 1768823349056
+  }
+]
