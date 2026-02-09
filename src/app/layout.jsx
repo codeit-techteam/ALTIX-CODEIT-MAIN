@@ -31,11 +31,11 @@ export const metadata = {
   authors: [{ name: "Altix Codeit" }],
   creator: "Altix Codeit",
   publisher: "Altix Codeit",
-  metadataBase: new URL("https://www.altixcodeit.com"),
+  metadataBase: new URL("https://mycodeit.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.altixcodeit.com",
+    url: "https://mycodeit.com",
     title: "Altix Codeit | Premium Web & App Development",
     description:
       "IITian-backed startup providing premium Web & App Development, AI Solutions, and GTM strategy advisory.",
@@ -54,13 +54,13 @@ export const metadata = {
     title: "Altix Codeit | Premium Web & App Development",
     description:
       "IITian-backed startup providing premium Web & App Development, AI Solutions, and GTM strategy advisory.",
-    creator: "@altixcodeit",
+
     images: ["/og-image.jpg"],
   },
   alternates: {
-    canonical: "https://www.altixcodeit.com",
+    canonical: "https://mycodeit.com",
     languages: {
-      'en-US': 'https://www.altixcodeit.com',
+      'en-US': 'https://mycodeit.com',
     },
   },
   robots: {
@@ -74,18 +74,23 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Altix Codeit",
-  url: "https://www.altixcodeit.com",
-  logo: "https://www.altixcodeit.com/logo.png",
+  url: "https://mycodeit.com",
+  logo: "https://mycodeit.com/logo.png",
   sameAs: [
-    "https://twitter.com/altixcodeit",
-    "https://linkedin.com/company/altixcodeit",
-    "https://instagram.com/altixcodeit",
+    "https://github.com/codeit-techteam",
+    "https://www.linkedin.com/in/codeit-codeit-4b4582383/",
+    "https://www.instagram.com/codeit.world/",
   ],
   contactPoint: {
     "@type": "ContactPoint",

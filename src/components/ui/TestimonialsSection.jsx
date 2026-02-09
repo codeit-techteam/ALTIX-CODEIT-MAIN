@@ -1,7 +1,7 @@
 "use client";
 
 
-import { Star, ArrowRight } from "lucide-react";
+import { Star } from "lucide-react";
 import Image from "next/image";
 
 const clients = [
@@ -110,9 +110,7 @@ const ClientCard = ({ client }) => {
                     <h3 className="text-lg font-bold text-white tracking-wide group-hover:text-[#66fcf1] transition-colors duration-300">{client.name}</h3>
                     <span className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase">{client.category}</span>
                 </div>
-                <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center bg-white/5 group-hover:bg-[#66fcf1] group-hover:border-[#66fcf1] transition-all duration-300">
-                    <ArrowRight size={18} className="text-gray-400 group-hover:text-black -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
-                </div>
+
             </div>
         </div>
     );

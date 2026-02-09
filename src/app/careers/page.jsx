@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { ApplicationModal } from "@/components/ui/ApplicationModal";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Zap, Rocket, Box, Users, Globe, Code, Database, Cpu, Layers } from "lucide-react";
 import { FadeUp, FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/ScrollAnimations";
 import { motion } from "framer-motion";
@@ -29,12 +30,110 @@ const benefits = [
 ];
 
 const techStack = [
-    { name: "Next.js 14", icon: Globe },
-    { name: "React Native", icon: Code },
-    { name: "Node.js", icon: Layers },
-    { name: "Python / AI", icon: Cpu },
-    { name: "MongoDB", icon: Database },
-    { name: "AWS", icon: Box }, // generic cloud icon
+    {
+        name: "Next.js 14",
+        color: "group-hover:text-white",
+        bg: "group-hover:bg-white/10",
+        border: "group-hover:border-white/50",
+        shadow: "group-hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]",
+        icon: (props) => (
+            <svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+                <mask id="mask0_next" style={{ maskType: "alpha" }} maskUnits="userSpaceOnUse" x="0" y="0" width="180" height="180">
+                    <circle cx="90" cy="90" r="90" fill="black" />
+                </mask>
+                <g mask="url(#mask0_next)">
+                    <circle cx="90" cy="90" r="90" fill="black" stroke="white" strokeWidth="4" />
+                    <path d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z" fill="white" />
+                    <rect x="115" y="54" width="12" height="72" fill="white" />
+                </g>
+            </svg>
+        )
+    },
+    {
+        name: "React Native",
+        color: "group-hover:text-[#61DAFB]",
+        bg: "group-hover:bg-[#61DAFB]/10",
+        border: "group-hover:border-[#61DAFB]/50",
+        shadow: "group-hover:shadow-[0_0_30px_rgba(97,218,251,0.3)]",
+        icon: (props) => (
+            <svg viewBox="-11.5 -10.23174 23 20.46348" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+                <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
+                <g stroke="#61DAFB" strokeWidth="1" fill="none">
+                    <ellipse rx="11" ry="4.2" />
+                    <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+                    <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+                </g>
+            </svg>
+        )
+    },
+    {
+        name: "Node.js",
+        color: "group-hover:text-[#339933]",
+        bg: "group-hover:bg-[#339933]/10",
+        border: "group-hover:border-[#339933]/50",
+        shadow: "group-hover:shadow-[0_0_30px_rgba(51,153,51,0.3)]",
+        icon: (props) => (
+            <Image
+                src="/images/nodejsLight.png"
+                alt="Node.js"
+                width={80}
+                height={80}
+                className={props.className}
+                style={{ objectFit: "contain" }}
+            />
+        )
+    },
+    {
+        name: "Python / AI",
+        color: "group-hover:text-[#FFD43B]",
+        bg: "group-hover:bg-[#306998]/10",
+        border: "group-hover:border-[#FFD43B]/50",
+        shadow: "group-hover:shadow-[0_0_30px_rgba(255,212,59,0.3)]",
+        icon: (props) => (
+            <Image
+                src="/images/python-logo-only.png"
+                alt="Python"
+                width={80}
+                height={80}
+                className={props.className}
+                style={{ objectFit: "contain" }}
+            />
+        )
+    },
+    {
+        name: "MongoDB",
+        color: "group-hover:text-[#47A248]",
+        bg: "group-hover:bg-[#47A248]/10",
+        border: "group-hover:border-[#47A248]/50",
+        shadow: "group-hover:shadow-[0_0_30px_rgba(71,162,72,0.3)]",
+        icon: (props) => (
+            <Image
+                src="/images/monggoo.png"
+                alt="MongoDB"
+                width={80}
+                height={80}
+                className={props.className}
+                style={{ objectFit: "contain" }}
+            />
+        )
+    },
+    {
+        name: "AWS",
+        color: "group-hover:text-[#FF9900]",
+        bg: "group-hover:bg-[#FF9900]/10",
+        border: "group-hover:border-[#FF9900]/50",
+        shadow: "group-hover:shadow-[0_0_30px_rgba(255,153,0,0.3)]",
+        icon: (props) => (
+            <Image
+                src="/images/aws-color.png"
+                alt="AWS"
+                width={80}
+                height={80}
+                className={props.className}
+                style={{ objectFit: "contain" }}
+            />
+        )
+    }
 ];
 
 const FALLBACK_ROLES = [
@@ -125,7 +224,7 @@ export default function Careers() {
         "hiringOrganization": {
             "@type": "Organization",
             "name": "Altix Codeit",
-            "sameAs": "https://altixcodeit.com"
+            "sameAs": "https://mycodeit.com"
         },
         "jobLocation": {
             "@type": "Place",
@@ -196,15 +295,20 @@ export default function Careers() {
                 {/* Tech Stack Highlights */}
                 <section className="container mx-auto px-6 mb-32">
                     <FadeIn>
-                        <div className="p-10 rounded-3xl bg-[#121212] border border-white/5 text-center">
-                            <h3 className="text-2xl font-bold text-white mb-8">Our Core Tech Stack</h3>
-                            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+                        <div className="p-10 rounded-3xl bg-[#121212] border border-white/5 text-center relative overflow-hidden">
+                            {/* Gradient Bloom */}
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[#66fcf1]/5 blur-[100px] pointer-events-none" />
+
+                            <h3 className="text-2xl font-bold text-white mb-8 relative z-10">Our Core Tech Stack</h3>
+                            <div className="flex flex-wrap justify-center gap-8 md:gap-12 relative z-10">
                                 {techStack.map((tech) => (
-                                    <div key={tech.name} className="flex flex-col items-center gap-3 text-gray-400 hover:text-[#66fcf1] transition-colors group">
-                                        <div className="p-4 rounded-xl bg-white/5 group-hover:bg-[#66fcf1]/10 transition-colors">
-                                            <tech.icon size={32} />
+                                    <div key={tech.name} className="flex flex-col items-center gap-4 group cursor-pointer">
+                                        <div className={`w-20 h-20 md:w-24 md:h-24 p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-500 relative ${tech.bg} ${tech.border} ${tech.shadow} group-hover:-translate-y-2`}>
+                                            <div className={`text-gray-400 transition-colors duration-300 ${tech.color}`}>
+                                                <tech.icon className="w-10 h-10 md:w-12 md:h-12" />
+                                            </div>
                                         </div>
-                                        <span className="text-sm font-medium">{tech.name}</span>
+                                        <span className={`text-sm md:text-base font-bold text-gray-400 transition-colors duration-300 ${tech.color}`}>{tech.name}</span>
                                     </div>
                                 ))}
                             </div>

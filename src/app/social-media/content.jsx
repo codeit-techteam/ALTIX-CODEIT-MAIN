@@ -55,33 +55,33 @@ const ServiceCard = ({ service, index }) => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: index * 0.1, duration: 0.5 }}
-        className="group relative p-8 rounded-3xl bg-[#121212]/80 backdrop-blur-xl border border-white/5 hover:border-[#66fcf1]/30 transition-all duration-300 hover:-translate-y-2 overflow-hidden h-full"
+        className="group relative p-8 rounded-3xl bg-gradient-to-b from-[#1a1a1a]/80 to-[#0b0c10]/90 backdrop-blur-2xl border border-white/10 hover:border-[#66fcf1]/50 transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_-20px_rgba(102,252,241,0.2)] overflow-hidden h-full flex flex-col"
     >
-        {/* Hover Highlight */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-[#66fcf1]/10 rounded-full blur-[60px] opacity-0 group-hover:opacity-100 transition-all" />
+        {/* Hover Highlight - Dynamic Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#66fcf1]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute top-0 right-0 w-48 h-48 bg-[#66fcf1]/10 rounded-full blur-[80px] -mr-16 -mt-16 opacity-20 group-hover:opacity-60 transition-all duration-700" />
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/10 rounded-full blur-[60px] -ml-10 -mb-10 opacity-0 group-hover:opacity-40 transition-all duration-700" />
 
         <div className="relative z-10 flex flex-col h-full">
             <div className="mb-6 flex justify-between items-start">
-                <div className="w-14 h-14 bg-[#1f2833] rounded-2xl flex items-center justify-center text-[#66fcf1] border border-white/5 group-hover:bg-[#66fcf1] group-hover:text-black transition-colors duration-300 shadow-lg">
-                    <service.icon size={28} />
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1f2833] to-[#0b0c10] flex items-center justify-center text-[#66fcf1] border border-white/5 group-hover:border-[#66fcf1]/30 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(102,252,241,0.3)] transition-all duration-300">
+                    <service.icon size={32} strokeWidth={1.5} />
                 </div>
-                <div className="px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover:border-[#66fcf1]/30 group-hover:text-[#66fcf1] transition-colors">
+                <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[11px] font-bold text-gray-400 uppercase tracking-widest group-hover:border-[#66fcf1]/30 group-hover:bg-[#66fcf1]/10 group-hover:text-[#66fcf1] transition-all duration-300">
                     {service.tag}
                 </div>
             </div>
 
-            <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#66fcf1] transition-colors">
+            <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#66fcf1] transition-colors duration-300">
                 {service.title}
             </h3>
 
-            <p className="text-gray-400 text-base leading-relaxed mb-8 flex-grow">
+            <p className="text-gray-400 text-base leading-relaxed flex-grow group-hover:text-gray-300 transition-colors">
                 {service.desc}
             </p>
 
-            <div className="flex items-center text-sm font-bold text-white/50 group-hover:text-[#66fcf1] transition-colors mt-auto">
-                <span className="mr-2">Explore Service</span>
-                <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform" />
-            </div>
+            {/* Animated Bottom Bar */}
+            <div className="h-1 w-0 bg-gradient-to-r from-[#66fcf1] to-blue-500 mt-6 group-hover:w-full transition-all duration-700 ease-out rounded-full" />
         </div>
     </motion.div>
 );
@@ -127,7 +127,7 @@ const ScrollRevealSection = () => {
     const y3 = useTransform(scrollYProgress, [0, 1], [300, -300]);
 
     return (
-        <section ref={containerRef} className="py-40 bg-[#0b0c10] relative overflow-hidden">
+        <section id="growth-strategy" ref={containerRef} className="py-40 bg-[#0b0c10] relative overflow-hidden">
             {/* Decorational light */}
             <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#66fcf1]/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -290,7 +290,7 @@ export default function SocialMediaContent() {
                                     Start Growing Now
                                 </Button>
                             </Link>
-                            <Link href="#strategy">
+                            <Link href="#growth-strategy">
                                 <Button
                                     variant="outline"
                                     className="border-white/20 text-white rounded-full px-12 py-8 text-xl font-bold hover:bg-white/10"

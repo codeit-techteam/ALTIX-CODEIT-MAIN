@@ -31,7 +31,7 @@ export default function Contact() {
                                             "contactPoint": {
                                                 "@type": "ContactPoint",
                                                 "contactType": "sales",
-                                                "email": "contact@altixcodeit.com"
+                                                "email": "contact@mycodeit.com"
                                             }
                                         }
                                     })

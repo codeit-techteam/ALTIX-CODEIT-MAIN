@@ -51,7 +51,7 @@ export default function Home() {
 
         {/* Services Section */}
         <div className="py-12 bg-[#0b0c10]">
-          <ServicesGrid />
+          <ServicesGrid limit={4} />
           <div className="flex justify-center mt-8">
             <Link href="/services">
               <Button variant="outline" size="lg" className="group">

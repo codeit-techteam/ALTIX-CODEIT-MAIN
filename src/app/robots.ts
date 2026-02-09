@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: ['/admin/', '/api/'],
         },
-        sitemap: 'https://www.altixcodeit.com/sitemap.xml',
+        sitemap: 'https://mycodeit.com/sitemap.xml',
     };
 }

@@ -5,7 +5,7 @@ export const metadata = {
     openGraph: {
         title: "Careers at Altix Codeit | Join Our Engineering Team",
         description: "Join the 1% of engineers building the next generation of tech.",
-        url: "https://altixcodeit.com/careers",
+        url: "https://mycodeit.com/careers",
         siteName: "Altix Codeit",
         images: [
             {

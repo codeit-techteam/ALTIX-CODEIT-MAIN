@@ -5,7 +5,7 @@ export const metadata = {
     openGraph: {
         title: "Contact Altix Codeit | Get a Technical Consultation",
         description: "Ready to scale? Connect with our team for a technical consultation.",
-        url: "https://altixcodeit.com/contact",
+        url: "https://mycodeit.com/contact",
         siteName: "Altix Codeit",
         locale: "en_US",
         type: "website",

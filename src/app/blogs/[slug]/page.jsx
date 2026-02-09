@@ -39,7 +39,7 @@ export async function generateMetadata({ params }) {
 
     const title = `${post.title} | Altix Codeit`;
     const description = post.excerpt;
-    const url = `https://www.altixcodeit.com/blogs/${slug}`;
+    const url = `https://mycodeit.com/blogs/${slug}`;
 
     return {
         title,
@@ -97,7 +97,7 @@ export default async function BlogPost({ params }) {
             "name": "Altix Codeit",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://www.altixcodeit.com/logo.png"
+                "url": "https://mycodeit.com/logo.png"
             }
         },
         "datePublished": post.createdAt,

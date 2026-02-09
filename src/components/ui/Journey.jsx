@@ -8,7 +8,7 @@ const journeyData = [
     {
         year: "2021",
         title: "Inception",
-        description: "Founded in a dorm room at IIT Bombay. The vision was simple: stop writing spaghetti code and start engineering robust systems.",
+        description: "Founded in a dorm room at IIT. The vision was simple: stop writing spaghetti code and start engineering robust systems.",
         align: "right",
     },
     {

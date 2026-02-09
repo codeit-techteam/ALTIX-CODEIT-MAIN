@@ -5,7 +5,7 @@ export const metadata = {
     openGraph: {
         title: "About Altix Codeit | IITian-Led Experts",
         description: "From IIT Bombay dorms to global enterprise solutions. Discover our story.",
-        url: "https://altixcodeit.com/about",
+        url: "https://mycodeit.com/about",
         siteName: "Altix Codeit",
         images: [
             {

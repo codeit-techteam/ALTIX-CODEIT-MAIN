@@ -30,6 +30,7 @@ export function ShowcaseSection() {
 
     return (
         <section
+            id="engineering-showcase"
             ref={containerRef}
             className="relative min-h-[100vh] bg-[#0B0F10] overflow-hidden flex items-center justify-center py-20 px-6"
         >

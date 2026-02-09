@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Github, Linkedin, Instagram } from "lucide-react";
 
 const socialLinks = [
-    { icon: Github, href: "#", label: "Github" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Github, href: "https://github.com/codeit-techteam", label: "Github" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/codeit-codeit-4b4582383/", label: "LinkedIn" },
+    { icon: Instagram, href: "https://www.instagram.com/codeit.world/", label: "Instagram" },
 ];
 
 const footerLinks = [
@@ -65,6 +64,8 @@ export const Footer = () => {
                                 <Link
                                     key={social.label}
                                     href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="text-gray-400 hover:text-primary transition-colors"
                                     aria-label={social.label}
                                 >
@@ -99,9 +100,8 @@ export const Footer = () => {
                         © {new Date().getFullYear()} Altix Codeit. All rights reserved.
                     </p>
                     <div className="flex items-center gap-2 text-sm text-gray-500">
-                        <span>Made with</span>
-                        <span className="text-red-500">♥</span>
-                        <span>by Altix Team</span>
+                        <span>Designed & Developed by</span>
+                        <span className="text-primary font-medium">Codeit Tech Team</span>
                     </div>
                 </div>
             </div>
