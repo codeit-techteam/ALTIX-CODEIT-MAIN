@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import dbConnect from '@/lib/mongodb';
 import Contact from '@/models/Contact';
 
@@ -26,31 +26,18 @@ export async function POST(req) {
       console.log('Lead saved to database:', name, email);
     } catch (dbError) {
       console.error('Database save error:', dbError.message);
-      // Even if DB fails, we still try to send the email below
     }
 
-    // Try to send email notification (best-effort, won't block success response)
+    // Send email notification via Resend (HTTP API — works on Vercel serverless)
     try {
-      if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-        const transporter = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 587,
-          secure: false,
-          auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-          },
-          tls: {
-            rejectUnauthorized: false,
-          },
-          connectionTimeout: 8000,
-          greetingTimeout: 8000,
-          socketTimeout: 8000,
-        });
+      if (!process.env.RESEND_API_KEY) {
+        console.warn('RESEND_API_KEY not configured, skipping email notification');
+      } else {
+        const resend = new Resend(process.env.RESEND_API_KEY);
 
-        const mailOptions = {
-          from: `"Altix Codeit Leads" <${process.env.EMAIL_USER}>`,
-          to: process.env.EMAIL_USER,
+        await resend.emails.send({
+          from: 'Altix Codeit Leads <onboarding@resend.dev>',
+          to: [process.env.EMAIL_USER || 'codeit.techteam@gmail.com'],
           replyTo: email,
           subject: `🚀 New Lead: ${name} from ${company || 'Unknown Company'}`,
           html: `
@@ -110,17 +97,13 @@ export async function POST(req) {
                 </div>
             </body>
             </html>
-            `,
-        };
+          `,
+        });
 
-        const info = await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully:', info.messageId);
-      } else {
-        console.warn('Email credentials not configured, skipping email notification');
+        console.log('Email sent via Resend successfully');
       }
     } catch (emailError) {
-      // Email failed but lead is already saved — log error but don't fail the request
-      console.error('Email send failed (lead is saved in DB):', emailError.message);
+      console.error('Resend email failed (lead is saved in DB):', emailError.message);
     }
 
     // Always return success — the lead is captured in the database
