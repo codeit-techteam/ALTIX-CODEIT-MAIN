@@ -27,7 +27,13 @@ export async function POST(req) {
       console.error('Database save error (continuing to send email):', dbError);
     }
 
-    // Create Transporter
+    // Validate environment variables
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error('Missing EMAIL_USER or EMAIL_PASS environment variables');
+      return Response.json({ message: 'Email service is not configured.' }, { status: 500 });
+    }
+
+    // Create Transporter with timeout for serverless
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
@@ -36,12 +42,12 @@ export async function POST(req) {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      connectionTimeout: 8000,
+      greetingTimeout: 8000,
+      socketTimeout: 8000,
     });
 
-    // Verify transporter connection
-    await transporter.verify();
-
-    // Email Content — using hosted logo URL instead of filesystem path (for serverless compatibility)
+    // Email Content
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://altixcodeit.com';
 
     const mailOptions = {
