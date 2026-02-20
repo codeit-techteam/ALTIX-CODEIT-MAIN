@@ -49,15 +49,21 @@ export async function POST(req) {
             resumePath,
         });
 
-        // Email Notification
+        // Email Notification - port 587 (STARTTLS) for Vercel serverless compatibility
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
-            port: 465,
-            secure: true,
+            port: 587,
+            secure: false,
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS,
             },
+            tls: {
+                rejectUnauthorized: false,
+            },
+            connectionTimeout: 8000,
+            greetingTimeout: 8000,
+            socketTimeout: 8000,
         });
 
         const mailOptions = {

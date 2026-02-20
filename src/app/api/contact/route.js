@@ -33,22 +33,22 @@ export async function POST(req) {
       return Response.json({ message: 'Email service is not configured.' }, { status: 500 });
     }
 
-    // Create Transporter with timeout for serverless
+    // Create Transporter - using port 587 (STARTTLS) as port 465 is blocked on Vercel serverless
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
+      },
+      tls: {
+        rejectUnauthorized: false,
       },
       connectionTimeout: 8000,
       greetingTimeout: 8000,
       socketTimeout: 8000,
     });
-
-    // Email Content
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://altixcodeit.com';
 
     const mailOptions = {
       from: `"Altix Codeit Leads" <${process.env.EMAIL_USER}>`,
