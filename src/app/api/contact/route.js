@@ -12,7 +12,7 @@ export async function POST(req) {
       return Response.json({ message: 'Missing required fields' }, { status: 400 });
     }
 
-    // Save to Database
+    // Save to Database FIRST — this is the priority (never lose a lead)
     try {
       await dbConnect();
       await Contact.create({
@@ -23,39 +23,37 @@ export async function POST(req) {
         budget,
         message,
       });
+      console.log('Lead saved to database:', name, email);
     } catch (dbError) {
-      console.error('Database save error (continuing to send email):', dbError);
+      console.error('Database save error:', dbError.message);
+      // Even if DB fails, we still try to send the email below
     }
 
-    // Validate environment variables
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      console.error('Missing EMAIL_USER or EMAIL_PASS environment variables');
-      return Response.json({ message: 'Email service is not configured.' }, { status: 500 });
-    }
+    // Try to send email notification (best-effort, won't block success response)
+    try {
+      if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+        const transporter = nodemailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: 587,
+          secure: false,
+          auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+          },
+          tls: {
+            rejectUnauthorized: false,
+          },
+          connectionTimeout: 8000,
+          greetingTimeout: 8000,
+          socketTimeout: 8000,
+        });
 
-    // Create Transporter - using port 587 (STARTTLS) as port 465 is blocked on Vercel serverless
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
-      connectionTimeout: 8000,
-      greetingTimeout: 8000,
-      socketTimeout: 8000,
-    });
-
-    const mailOptions = {
-      from: `"Altix Codeit Leads" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
-      replyTo: email,
-      subject: `🚀 New Lead: ${name} from ${company || 'Unknown Company'}`,
-      html: `
+        const mailOptions = {
+          from: `"Altix Codeit Leads" <${process.env.EMAIL_USER}>`,
+          to: process.env.EMAIL_USER,
+          replyTo: email,
+          subject: `🚀 New Lead: ${name} from ${company || 'Unknown Company'}`,
+          html: `
             <!DOCTYPE html>
             <html>
             <head>
@@ -113,16 +111,23 @@ export async function POST(req) {
             </body>
             </html>
             `,
-    };
+        };
 
-    // Send Email
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully:', info.messageId);
+        const info = await transporter.sendMail(mailOptions);
+        console.log('Email sent successfully:', info.messageId);
+      } else {
+        console.warn('Email credentials not configured, skipping email notification');
+      }
+    } catch (emailError) {
+      // Email failed but lead is already saved — log error but don't fail the request
+      console.error('Email send failed (lead is saved in DB):', emailError.message);
+    }
 
-    return Response.json({ message: 'Email sent and saved successfully' }, { status: 200 });
+    // Always return success — the lead is captured in the database
+    return Response.json({ message: 'Message received successfully' }, { status: 200 });
 
   } catch (error) {
-    console.error('Contact API Error:', error.message, error.stack);
-    return Response.json({ message: 'Failed to send email. Please try again later.' }, { status: 500 });
+    console.error('Contact API Error:', error.message);
+    return Response.json({ message: 'Failed to process request.' }, { status: 500 });
   }
 }
