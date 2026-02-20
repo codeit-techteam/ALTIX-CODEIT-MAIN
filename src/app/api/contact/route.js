@@ -5,7 +5,7 @@ import Contact from '@/models/Contact';
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { name, email, company, scope, budget, message } = body;
+    const { name, email, phone, company, scope, budget, message } = body;
 
     // Simple validation
     if (!name || !email || !message) {
@@ -18,6 +18,7 @@ export async function POST(req) {
       await Contact.create({
         name,
         email,
+        phone,
         company,
         scope,
         budget,
@@ -70,6 +71,10 @@ export async function POST(req) {
                         <div class="field">
                             <div class="label">Email Address</div>
                             <div class="value">${email}</div>
+                        </div>
+                        <div class="field">
+                            <div class="label">Phone Number</div>
+                            <div class="value">${phone || 'N/A'}</div>
                         </div>
                         <div style="display: flex; gap: 20px;">
                             <div class="field" style="flex: 1;">
