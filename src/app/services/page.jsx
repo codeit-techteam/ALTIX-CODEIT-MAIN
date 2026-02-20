@@ -15,10 +15,18 @@ import { ServiceList } from "@/components/ui/ServiceList";
 export const metadata = {
     title: "Expert Web & App Development Services | Altix Codeit",
     description: "Full-stack development, AI integration, and GTM strategy. We build scalable solutions for startups and enterprises.",
+    alternates: {
+        canonical: "/services",
+    },
     openGraph: {
         title: "Expert Web & App Development Services | Altix Codeit",
         description: "Full-stack development, AI integration, and GTM strategy.",
-    }
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Expert Web & App Development Services | Altix Codeit",
+        description: "Full-stack development, AI integration, and GTM strategy.",
+    },
 };
 
 export default function Services() {

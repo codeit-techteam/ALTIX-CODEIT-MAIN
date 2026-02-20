@@ -31,11 +31,11 @@ export const metadata = {
   authors: [{ name: "Altix Codeit" }],
   creator: "Altix Codeit",
   publisher: "Altix Codeit",
-  metadataBase: new URL("https://mycodeit.com"),
+  metadataBase: new URL("https://altixcodeit.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mycodeit.com",
+    url: "https://altixcodeit.com",
     title: "Altix Codeit | Premium Web & App Development",
     description:
       "IITian-backed startup providing premium Web & App Development, AI Solutions, and GTM strategy advisory.",
@@ -58,9 +58,9 @@ export const metadata = {
     images: ["/og-image.jpg"],
   },
   alternates: {
-    canonical: "https://mycodeit.com",
+    canonical: "https://altixcodeit.com",
     languages: {
-      'en-US': 'https://mycodeit.com',
+      'en-US': 'https://altixcodeit.com',
     },
   },
   robots: {
@@ -85,8 +85,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Altix Codeit",
-  url: "https://mycodeit.com",
-  logo: "https://mycodeit.com/logo.png",
+  url: "https://altixcodeit.com",
+  logo: "https://altixcodeit.com/logo.png",
   sameAs: [
     "https://github.com/codeit-techteam",
     "https://www.linkedin.com/in/codeit-codeit-4b4582383/",

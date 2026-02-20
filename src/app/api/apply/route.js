@@ -51,7 +51,9 @@ export async function POST(req) {
 
         // Email Notification
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS,
@@ -59,7 +61,7 @@ export async function POST(req) {
         });
 
         const mailOptions = {
-            from: process.env.EMAIL_USER,
+            from: `"Altix Codeit Hiring" <${process.env.EMAIL_USER}>`,
             to: process.env.EMAIL_USER,
             replyTo: email,
             subject: `New Application: ${roleTitle} - ${name}`,
@@ -95,7 +97,7 @@ export async function POST(req) {
             html: `
             <div style="font-family: Arial, sans-serif; padding: 40px; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px;">
                 <div style="text-align: center; margin-bottom: 30px; background-color: #0b0c10; padding: 20px; border-radius: 8px;">
-                    <img src="cid:codeitlogo" alt="Altix Codeit Logo" style="max-width: 150px; height: auto;" />
+                    <h2 style="color: #66fcf1; margin: 0;">Altix Codeit</h2>
                 </div>
                 
                 <h2 style="color: #000; margin-bottom: 20px;">Hi ${name},</h2>
@@ -123,11 +125,6 @@ export async function POST(req) {
                 </div>
             </div>
             `,
-            attachments: [{
-                filename: 'codeitLogo.png',
-                path: path.join(process.cwd(), 'public', 'codeitLogo.png'),
-                cid: 'codeitlogo' // same cid value as in the html img src
-            }]
         };
 
         try {

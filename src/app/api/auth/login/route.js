@@ -5,8 +5,8 @@ export async function POST(request) {
     try {
         const { username, password } = await request.json();
 
-        // Verify Credentials
-        if (username === "Codeit" && password === "Codeit@71203") {
+        // Verify Credentials from environment variables
+        if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
             // Set HttpOnly Cookie
             const cookieStore = await cookies();
             cookieStore.set('admin_token', 'authenticated', {

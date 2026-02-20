@@ -41,25 +41,26 @@ export const ContactForm = () => {
             const data = await res.json();
 
             if (!res.ok) {
-                console.log("Mocking success for demo");
+                setStatus("error");
+                setErrorMessage(data.message || "Failed to send message. Please try again.");
+                return;
             }
 
-            setTimeout(() => {
-                setStatus("success");
-                setFormData({
-                    name: "",
-                    email: "",
-                    phone: "",
-                    company: "",
-                    scope: "",
-                    budget: "",
-                    message: "",
-                });
-            }, 1000);
+            setStatus("success");
+            setFormData({
+                name: "",
+                email: "",
+                phone: "",
+                company: "",
+                scope: "",
+                budget: "",
+                message: "",
+            });
 
         } catch (error) {
             console.error("Submission error:", error);
-            setStatus("success");
+            setStatus("error");
+            setErrorMessage("Network error. Please check your connection and try again.");
         }
     };
 

@@ -13,34 +13,42 @@ export async function POST(req) {
     }
 
     // Save to Database
-    await dbConnect();
-    await Contact.create({
-      name,
-      email,
-      company,
-      scope,
-      budget,
-      message,
-    });
+    try {
+      await dbConnect();
+      await Contact.create({
+        name,
+        email,
+        company,
+        scope,
+        budget,
+        message,
+      });
+    } catch (dbError) {
+      console.error('Database save error (continuing to send email):', dbError);
+    }
 
     // Create Transporter
-    // NOTE: In a real app, use environment variables.
     const transporter = nodemailer.createTransport({
-      service: 'gmail', // or use host/port for other SMTP
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
     });
 
-    // Email Content
-    const logoPath = process.cwd() + '/public/codeitLogo.png';
+    // Verify transporter connection
+    await transporter.verify();
+
+    // Email Content — using hosted logo URL instead of filesystem path (for serverless compatibility)
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://altixcodeit.com';
 
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: `"Altix Codeit Leads" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
       replyTo: email,
-      subject: `New Lead: ${name} from ${company || 'Unknown Company'}`,
+      subject: `🚀 New Lead: ${name} from ${company || 'Unknown Company'}`,
       html: `
             <!DOCTYPE html>
             <html>
@@ -49,7 +57,7 @@ export async function POST(req) {
                     body { font-family: 'Arial', sans-serif; background-color: #0b0c10; color: #c5c6c7; padding: 20px; margin: 0; }
                     .container { max-width: 600px; margin: 0 auto; background-color: #1f2833; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid #333; }
                     .header { background-color: #0b0c10; padding: 30px; text-align: center; border-bottom: 2px solid #66fcf1; }
-                    .logo { height: 40px; }
+                    .header h2 { color: #66fcf1; margin: 0; font-size: 20px; }
                     .content { padding: 30px; }
                     .field { margin-bottom: 20px; }
                     .label { color: #66fcf1; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: bold; }
@@ -61,7 +69,7 @@ export async function POST(req) {
             <body>
                 <div class="container">
                     <div class="header">
-                        <img src="cid:logo" alt="Altix Codeit" class="logo" />
+                        <h2>🚀 New Lead Received</h2>
                     </div>
                     <div class="content">
                         <div class="field">
@@ -79,12 +87,12 @@ export async function POST(req) {
                             </div>
                             <div class="field" style="flex: 1;">
                                 <div class="label">Budget</div>
-                                <div class="value">${budget}</div>
+                                <div class="value">${budget || 'N/A'}</div>
                             </div>
                         </div>
                         <div class="field">
                             <div class="label">Project Scope</div>
-                            <div class="value">${scope}</div>
+                            <div class="value">${scope || 'N/A'}</div>
                         </div>
                         
                         <div class="label">Message</div>
@@ -99,20 +107,16 @@ export async function POST(req) {
             </body>
             </html>
             `,
-      attachments: [{
-        filename: 'codeitLogo.png',
-        path: logoPath,
-        cid: 'logo' // same cid value as in the html img src
-      }]
     };
 
     // Send Email
-    await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', info.messageId);
 
     return Response.json({ message: 'Email sent and saved successfully' }, { status: 200 });
 
   } catch (error) {
-    console.error('Contact API Error:', error);
-    return Response.json({ message: 'Failed to process request.' }, { status: 500 });
+    console.error('Contact API Error:', error.message, error.stack);
+    return Response.json({ message: 'Failed to send email. Please try again later.' }, { status: 500 });
   }
 }

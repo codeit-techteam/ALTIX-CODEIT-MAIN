@@ -13,10 +13,13 @@ export const metadata = {
         "Performance Ads",
         "Digital Marketing Agency"
     ],
+    alternates: {
+        canonical: "/social-media",
+    },
     openGraph: {
         title: "Social Media Agency & Influencer Marketing India | Altix Codeit",
         description: "Scale your brand with data-driven Influencer Marketing and Content Strategy.",
-        url: "https://mycodeit.com/social-media",
+        url: "https://altixcodeit.com/social-media",
         siteName: "Altix Codeit",
         images: [
             {

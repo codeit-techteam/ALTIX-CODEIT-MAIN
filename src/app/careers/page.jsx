@@ -224,7 +224,7 @@ export default function Careers() {
         "hiringOrganization": {
             "@type": "Organization",
             "name": "Altix Codeit",
-            "sameAs": "https://mycodeit.com"
+            "sameAs": "https://altixcodeit.com"
         },
         "jobLocation": {
             "@type": "Place",

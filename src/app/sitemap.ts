@@ -3,7 +3,7 @@ import dbConnect from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = 'https://mycodeit.com';
+    const baseUrl = 'https://altixcodeit.com';
 
     // Base routes
     const routes = [

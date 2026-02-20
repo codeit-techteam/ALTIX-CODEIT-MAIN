@@ -107,8 +107,8 @@ export default function PrivacyPolicy() {
                         <div className="border-t border-white/10 pt-8">
                             <h2 className="text-xl font-bold text-white mb-4">Contact Us</h2>
                             <p className="text-gray-400 mb-4">If you have questions or comments about this policy, you may email us at:</p>
-                            <a href="mailto:privacy@mycodeit.com" className="flex items-center gap-2 text-primary hover:underline font-medium">
-                                <MailIcon /> privacy@mycodeit.com
+                            <a href="mailto:privacy@altixcodeit.com" className="flex items-center gap-2 text-primary hover:underline font-medium">
+                                <MailIcon /> privacy@altixcodeit.com
                             </a>
                         </div>
                     </FadeIn>
