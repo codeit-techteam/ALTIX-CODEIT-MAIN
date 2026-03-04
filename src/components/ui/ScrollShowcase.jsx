@@ -25,11 +25,11 @@ export const ScrollShowcase = () => {
     });
 
     // --- Animation Sequence ---
-    // 1. Zoom Out Phase (0% - 35% scroll)
+    // 1. Subtle Zoom Out Phase (0% - 30% scroll)
     const deviceScale = useTransform(
         scrollYProgress,
         [0, 0.3],
-        isMobile ? [1.1, 1] : [3, 1]
+        isMobile ? [1.05, 1] : [1.4, 1]
     );
 
     // 2. Slide Right Phase (35% - 70% scroll)

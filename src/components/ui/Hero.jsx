@@ -1,9 +1,7 @@
 "use client";
 
-import Spline from '@splinetool/react-spline/next';
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import RobotModel from "./RobotModel";
 import { HeroBackground } from "./HeroBackground";
 
 export const Hero = () => {
@@ -38,7 +36,7 @@ export const Hero = () => {
                 className="absolute bottom-0 right-0 md:right-1/4 w-72 h-72 md:w-96 md:h-96 bg-accent/20 rounded-full blur-[100px] md:blur-[128px] pointer-events-none"
             />
 
-            <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10 h-full">
+            <div className="container mx-auto px-6 flex items-center justify-start relative z-10 h-full">
                 {/* Text Content */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
@@ -86,17 +84,6 @@ export const Hero = () => {
                             View Our Work
                         </Button>
                     </div>
-                </motion.div>
-
-                {/* Spline 3D Scene */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.2 }}
-                    className="h-[400px] md:h-[600px] lg:h-[800px] w-full relative z-10 flex items-center justify-center order-first lg:order-last -mt-10 lg:mt-0"
-                >
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b0c10] via-transparent to-transparent z-10 lg:hidden" />
-                    <RobotModel />
                 </motion.div>
             </div>
         </section>
