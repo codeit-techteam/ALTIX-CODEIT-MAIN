@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
@@ -11,6 +14,7 @@ import { ContactCTA } from "@/components/ui/ContactCTA";
 import { CodeShowcase } from "@/components/ui/CodeShowcase";
 import { SocialMediaFlow } from "@/components/ui/SocialMediaFlow";
 import { ServiceList } from "@/components/ui/ServiceList";
+import { trackEvent } from "@/lib/analytics";
 
 export const metadata = {
     title: "Expert Web & App Development Services | Altix Codeit",
@@ -30,6 +34,14 @@ export const metadata = {
 };
 
 export default function Services() {
+    useEffect(() => {
+        trackEvent("service_page_visit", {
+            event_category: "Funnel",
+            event_label: "Service Page",
+            page_location: window.location.pathname,
+        });
+    }, []);
+
     return (
         <div className="min-h-screen flex flex-col">
             <Navbar />

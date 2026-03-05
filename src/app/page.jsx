@@ -1,3 +1,6 @@
+\"use client\";
+
+import { useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/ui/Hero";
@@ -7,7 +10,6 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ScrollShowcase } from "@/components/ui/ScrollShowcase";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/components/ui/ScrollAnimations";
-
 import { ChatShowcase } from "@/components/ui/ChatShowcase";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { PromoBanner } from "@/components/ui/PromoBanner";
@@ -16,6 +18,7 @@ import { ExpertiseSection } from "@/components/ui/ExpertiseSection";
 import { ClientsSection } from "@/components/ui/ClientsSection";
 import { TestimonialsSection } from "@/components/ui/TestimonialsSection";
 import { ShowcaseSection } from "@/components/ui/ShowcaseSection";
+import { trackEvent } from "@/lib/analytics";
 
 export const metadata = {
   title: "Altix Codeit – App & Web Development Company",
@@ -36,6 +39,14 @@ export const metadata = {
 };
 
 export default function Home() {
+  useEffect(() => {
+    trackEvent("landing_page_visit", {
+      event_category: "Funnel",
+      event_label: "Homepage",
+      page_location: "home",
+    });
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />

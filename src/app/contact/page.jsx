@@ -1,13 +1,25 @@
+"use client";
+
+import { useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { Calendar, Mail, MapPin, Phone, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { FadeUp, FadeIn, SlideIn, StaggerContainer, StaggerItem } from "@/components/ui/ScrollAnimations";
 import { ContactForm } from "@/components/ui/ContactForm";
+import { trackEvent } from "@/lib/analytics";
 
 
 
 export default function Contact() {
+    useEffect(() => {
+        trackEvent("contact_page_visit", {
+            event_category: "Funnel",
+            event_label: "Contact Page",
+            page_location: "contact",
+        });
+    }, []);
+
     return (
         <div className="min-h-screen flex flex-col">
             <Navbar />
