@@ -61,6 +61,8 @@ export const ContactForm = () => {
             trackEvent("contact_form_submit", {
                 event_category: "Lead",
                 event_label: "Contact Form",
+                form_location: "contact_page",
+                service_interest: formData.scope,
             });
         } catch (error) {
             console.error("Submission error:", error);
