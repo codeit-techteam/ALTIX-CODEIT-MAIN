@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { GA_MEASUREMENT_ID } from "@/lib/analytics";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -112,7 +113,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-0D9S89LE2B"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -120,7 +121,7 @@ export default function RootLayout({ children }) {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-0D9S89LE2B');
+            gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
       </body>
