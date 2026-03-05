@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Send, CheckCircle, AlertCircle, User, Mail, Phone, FileText, Briefcase, IndianRupee, Target } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
 
 export const ContactForm = () => {
     const [formData, setFormData] = useState({
@@ -57,6 +58,10 @@ export const ContactForm = () => {
                 message: "",
             });
 
+            trackEvent("contact_form_submit", {
+                event_category: "Lead",
+                event_label: "Contact Form",
+            });
         } catch (error) {
             console.error("Submission error:", error);
             setStatus("error");

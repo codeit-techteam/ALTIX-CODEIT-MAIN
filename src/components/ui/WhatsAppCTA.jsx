@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Paperclip } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 export function WhatsAppCTA() {
     const [message, setMessage] = useState("");
@@ -12,6 +13,12 @@ export function WhatsAppCTA() {
         const textToSend = message.trim() || "Hi, I'm interested in building a project with Codeit.";
         const phoneNumber = "918368085750";
         const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(textToSend)}`;
+
+        trackEvent("whatsapp_click", {
+            event_category: "Lead",
+            event_label: "WhatsApp Button",
+        });
+
         window.open(url, "_blank");
     };
 
